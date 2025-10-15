@@ -1,37 +1,43 @@
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import SearchForm from "../../components/SearchForm";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({searchParams}: {searchParams: Promise< {query?: string} >}) {
 
   const query = (await searchParams).query
-  const posts = [
-    {
-      _createdAt : new Date(),
-      views : 55,
-      author : {
-        _id : 1,
-        name : 'adrian'
-      },
-      _id : 1,
-      description : 'This is a description.',
-      image : 'https://unsplash.com/photos/orange-flower-in-tilt-shift-lens-lt_zJH4GT_M',
-      category : 'robots' ,
-      title : 'we robots'
-    },
-    {
-      _createdAt : new Date(),
-      views : 55,
-      author : {
-        _id : 1,
-        name : 'adrian'
-      },
-      _id : 2,
-      description : 'This is a description.',
-      image : 'https://unsplash.com/photos/orange-flower-in-tilt-shift-lens-lt_zJH4GT_M',
-      category : 'robots' ,
-      title : 'we robots'
-    },
-  ]
+
+  const posts = await client.fetch(STARTUPS_QUERY)
+  console.log(JSON.stringify(posts , null , 2))
+
+  // const posts = [
+  //   {
+  //     _createdAt : new Date(),
+  //     views : 55,
+  //     author : {
+  //       _id : 1,
+  //       name : 'adrian'
+  //     },
+  //     _id : 1,
+  //     description : 'This is a description.',
+  //     image : 'https://unsplash.com/photos/orange-flower-in-tilt-shift-lens-lt_zJH4GT_M',
+  //     category : 'robots' ,
+  //     title : 'we robots'
+  //   },
+  //   {
+  //     _createdAt : new Date(),
+  //     views : 55,
+  //     author : {
+  //       _id : 1,
+  //       name : 'adrian'
+  //     },
+  //     _id : 2,
+  //     description : 'This is a description.',
+  //     image : 'https://unsplash.com/photos/orange-flower-in-tilt-shift-lens-lt_zJH4GT_M',
+  //     category : 'robots' ,
+  //     title : 'we robots'
+  //   },
+  // ]
 
   return (
     <>
