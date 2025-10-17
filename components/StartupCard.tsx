@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import { Button } from './ui/button'
 import { Author, Startup } from '@/sanity/types'
+import { urlFor } from '@/sanity/lib/image'
 
 export type StartupCardType = Omit<Startup , 'author'> & {author?: Author}
 
@@ -37,7 +38,7 @@ const StartupCard = ({post} : {post : StartupCardType}) => {
             </div>
             <Link href = {`/startup/${_id}`}>
                 <p className = 'startup-card_desc'>{description}</p>
-                <img src = {image} alt = "placeholder" className = 'startup-card_img' />
+                {image && (<img src = {image} alt = {title || 'Startup image'} className = 'startup-card_img' />)}
             </Link>
             <div className = 'flex-between gap-3 mt-5'>
                 <Link href = {`/?query=${category?.toLowerCase()}`}>
