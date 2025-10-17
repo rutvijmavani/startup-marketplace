@@ -8,7 +8,7 @@ export const formSchema = z.object({
     link: z.string().url().refine(async (url) => {
         try {
             const res = await fetch(url , {method: 'HEAD'})
-            const contentType = res.headers.get('cotent-type')
+            const contentType = res.headers.get('content-type')
             if(contentType?.startsWith('image/')){
                 return true
             }else{
@@ -18,5 +18,5 @@ export const formSchema = z.object({
             return false
         }
     }),
-    pitch: z.string().min(10)
+    Pitch: z.string().min(10)
 })
